@@ -3,11 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acme School - Usuarios</title>
+  <title>Acme School – Usuarios</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/styles.css">
-  <script src="../js/usuarios.js" defer></script>
+  <script type="module" src="../js/usuarios.js"></script>
 </head>
 <body>
-  <h1>Usuarios</h1>
+  <app-nav base="../"></app-nav>
+  <main>
+    <!-- LISTA (tabla) -->
+    <section class="panel">
+      <div class="panel-encabezado">
+        <h1>Usuarios</h1>
+        <button type="button" id="btn-nuevo-usuario">+ Nuevo usuario</button>
+      </div>
+      <!-- role="status": el lector de pantalla anuncia "Usuario guardado" sin mover el foco -->
+      <p id="mensaje-estado" class="mensaje-exito" role="status" hidden></p>
+
+      <!-- El contenedor permite desplazar la tabla de lado en celulares -->
+      <div class="tabla-contenedor">
+        <table>
+          <caption class="solo-lector">Usuarios registrados</caption>
+          <thead>
+            <tr>
+              <th scope="col">Identificación</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Email</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-usuarios"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FORMULARIO (crear / editar) -->
+    <section class="panel" id="seccion-form-usuario" hidden>
+      <h2 id="titulo-form-usuario">Nuevo usuario</h2>
+      <form id="form-usuario" class="form-rejilla" novalidate>
+        <div class="campo">
+          <label for="usuario-identificacion">Identificación</label>
+          <input id="usuario-identificacion" type="text" inputmode="numeric">
+        </div>
+        <div class="campo">
+          <label for="usuario-nombre">Nombre completo</label>
+          <input id="usuario-nombre" type="text" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label for="usuario-email">Email</label>
+          <input id="usuario-email" type="email" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label for="usuario-telefono">Teléfono</label>
+          <input id="usuario-telefono" type="tel" inputmode="numeric">
+        </div>
+        <div class="campo">
+          <label for="usuario-cargo">Cargo</label>
+          <select id="usuario-cargo">
+            <option value="">Selecciona un cargo</option>
+            <option value="administrativo">Administrativo</option>
+            <option value="docente">Docente</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="usuario-password">Contraseña</label>
+          <input id="usuario-password" type="password" autocomplete="new-password" aria-describedby="ayuda-password">
+          <small id="ayuda-password">Mínimo 6 caracteres.</small>
+        </div>
+
+        <div id="usuario-errores" class="mensaje-error campo-completo" role="alert" hidden></div>
+
+        <div class="acciones campo-completo">
+          <button type="button" id="btn-cancelar-usuario" class="boton-secundario">Cancelar</button>
+          <button type="submit">Guardar</button>
+        </div>
+      </form>
+    </section>
+  </main>
 </body>
 </html>
