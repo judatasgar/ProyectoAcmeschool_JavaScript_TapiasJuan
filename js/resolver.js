@@ -34,6 +34,9 @@ const examen_info = document.getElementById("examen-info");
 const reloj = document.getElementById("reloj");
 const formulario_examen = document.getElementById("form-examen");
 const contenedor_preguntas = document.getElementById("contenedor-preguntas");
+const progreso_texto = document.getElementById("progreso-texto");
+const progreso_barra = document.getElementById("progreso-barra");
+const progreso_relleno = document.getElementById("progreso-relleno");
 
 // ----- Pantalla 4: resultado -----
 const seccion_resultado = document.getElementById("seccion-resultado");
@@ -47,6 +50,7 @@ const boton_volver_lista = document.getElementById("btn-volver-lista");
 // Utilidad: mostrar UNA pantalla y ocultar las otras 3.
 // Antes escribíamos "hidden = true / false" a mano en cada evento.
 // Con 4 pantallas eso se repite mucho → lo encerramos en una función
+// (principio DRY: Don't Repeat Yourself).
 // =============================================================
 function mostrarPantalla(seccion_a_mostrar) {
   const pantallas = [seccion_lista, seccion_estudiante, seccion_examen, seccion_resultado];
@@ -101,7 +105,7 @@ function pintarListaExamenes() {
 }
 
 // =============================================================
-// PANTALLA 2: datos del estudiante
+// PANTALLA 2: datos del estudiante (tu código del commit 5)
 // =============================================================
 formulario_estudiante.addEventListener("submit", function (evento) {
   evento.preventDefault();
@@ -187,7 +191,35 @@ function pintarExamen() {
 
     contenedor_preguntas.appendChild(grupo);
   }); // ← cierra el forEach exterior (preguntas)
+
+  actualizarProgreso(); // empieza en "0 de 3 respondidas"
 }
+
+// =============================================================
+// BARRA DE PROGRESO:
+// =============================================================
+function actualizarProgreso() {
+  const total = examen_actual.preguntas.length;
+
+  // ":checked" → solo los radios marcados. Como cada pregunta deja marcar
+  // UNO solo, la cantidad de radios marcados = preguntas respondidas.
+  const respondidas = formulario_examen.querySelectorAll('input[type="radio"]:checked').length;
+
+  progreso_texto.textContent = `${respondidas} de ${total} respondidas`;
+
+  // El ancho del relleno es un porcentaje: 2 de 3 → 66.66%
+  progreso_relleno.style.width = `${(respondidas / total) * 100}%`;
+
+  // Atributos de accesibilidad: el lector de pantalla dice "2 de 3"
+  progreso_barra.setAttribute("aria-valuemax", total);
+  progreso_barra.setAttribute("aria-valuenow", respondidas);
+}
+
+// DELEGACIÓN DE EVENTOS: en vez de poner un listener en CADA radio,
+// ponemos UNO solo en el formulario. Cuando cambia cualquier radio,
+// el evento "change" SUBE (burbujea) hasta el formulario y lo atrapamos aquí.
+// Ventaja: sirve aunque los radios se creen después con JS.
+formulario_examen.addEventListener("change", actualizarProgreso);
 
 // Clic en "Terminar"
 formulario_examen.addEventListener("submit", function (evento) {

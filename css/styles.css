@@ -434,6 +434,7 @@ tbody tr:hover {
   top: 0;
   z-index: 5;
   display: flex;
+  flex-wrap: wrap; /* permite que la barra de progreso baje a su propia fila */
   justify-content: space-between;
   align-items: center;
   gap: 12px;
@@ -510,6 +511,33 @@ exam-timer.reloj-urgente {
   width: 18px;
   height: 18px;
   accent-color: var(--azul);
+}
+
+/* Barra de progreso del examen */
+.progreso {
+  flex-basis: 100%; /* ocupa una fila completa dentro del encabezado */
+  width: 100%;
+}
+
+.progreso-texto {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.progreso-barra {
+  height: 10px;
+  background: var(--azul-claro); /* la "pista" vacía */
+  border-radius: 999px;
+  overflow: hidden;              /* el relleno no se sale de las esquinas redondas */
+}
+
+.progreso-relleno {
+  height: 100%;
+  width: 0%;                     /* el JS cambia este ancho */
+  background: var(--ambar);
+  border-radius: 999px;
+  transition: width 0.3s ease;   /* el relleno crece suave, no de golpe */
 }
 
 /* ---------- 7. Resultado ---------- */

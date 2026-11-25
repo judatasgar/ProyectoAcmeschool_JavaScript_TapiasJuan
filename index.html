@@ -44,6 +44,15 @@
         </div>
         <!-- Nuestro Web Component: el navegador lo entiende gracias a exam-timer.js -->
         <exam-timer id="reloj"></exam-timer>
+        
+        <!-- Barra de progreso: role="progressbar" + aria-value* la hacen accesible -->
+        <div class="progreso">
+          <p id="progreso-texto" class="progreso-texto"></p>
+          <div id="progreso-barra" class="progreso-barra" role="progressbar"
+               aria-label="Preguntas respondidas" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+            <div id="progreso-relleno" class="progreso-relleno"></div>
+          </div>
+        </div>
       </header>
       <form id="form-examen">
         <div id="contenedor-preguntas"></div>
