@@ -573,6 +573,37 @@ exam-timer.reloj-urgente {
   font-weight: 600;
 }
 
+/* Revisión de respuestas (lista numerada debajo del resultado) */
+.revision {
+  text-align: left;      /* el panel del resultado está centrado; la lista no */
+  padding-left: 24px;    /* espacio para los números 1. 2. 3. */
+}
+
+.revision-item {
+  border-left: 4px solid var(--borde);
+  background: var(--fondo);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.revision-item p {
+  margin: 0;
+}
+
+.revision-enunciado {
+  font-weight: 600;
+}
+
+/* Solo cambia el color del borde: verde si acertó, rojo si no */
+.revision-correcta {
+  border-left-color: var(--verde);
+}
+
+.revision-incorrecta {
+  border-left-color: var(--rojo);
+}
+
 /* ---------- 8. Animaciones y responsive ---------- */
 
 /* Cada pantalla que aparece entra con un leve desvanecido */

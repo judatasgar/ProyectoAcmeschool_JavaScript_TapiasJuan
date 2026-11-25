@@ -44,6 +44,7 @@ const resultado_nota = document.getElementById("resultado-nota");
 const resultado_estudiante = document.getElementById("resultado-estudiante");
 const resultado_porcentaje = document.getElementById("resultado-porcentaje");
 const resultado_estado = document.getElementById("resultado-estado");
+const resultado_revision = document.getElementById("resultado-revision");
 const boton_volver_lista = document.getElementById("btn-volver-lista");
 
 // =============================================================
@@ -196,7 +197,7 @@ function pintarExamen() {
 }
 
 // =============================================================
-// BARRA DE PROGRESO:
+// BARRA DE PROGRESO: "2 de 3 respondidas"
 // =============================================================
 function actualizarProgreso() {
   const total = examen_actual.preguntas.length;
@@ -337,7 +338,56 @@ function pintarResultado(resultado, correctas, total, por_tiempo) {
     resultado_estado.textContent = `❌ No aprobado (mínimo ${examen_actual.porcentajeAprobacion}%)`;
     resultado_estado.className = "estado estado-reprobado";
   }
+
+  pintarRevision(resultado.respuestasElegidas);
 }
+
+// =============================================================
+// REVISIÓN: una línea por pregunta con ✅ o ❌
+// Es el MISMO recorrido de pintarExamen (forEach de preguntas),
+// pero en vez de crear radios mostramos qué eligió y si acertó.
+// =============================================================
+function pintarRevision(respuestas_elegidas) {
+  resultado_revision.innerHTML = "";
+
+  examen_actual.preguntas.forEach(function (pregunta, indice_pregunta) {
+    const indice_elegido = respuestas_elegidas[indice_pregunta];
+
+    // find() → la PRIMERA respuesta que cumple la condición (la correcta)
+    const correcta = pregunta.respuestas.find(function (respuesta) {
+      return respuesta.esCorrecta;
+    });
+
+    // <li> dentro de un <ol> → el navegador lo numera solo (1, 2, 3...)
+    const item = document.createElement("li");
+
+    const enunciado = document.createElement("p");
+    enunciado.className = "revision-enunciado";
+    enunciado.textContent = pregunta.enunciado;
+
+    const detalle = document.createElement("p");
+
+    if (indice_elegido === null) {
+      // Caso 1: la dejó en blanco
+      item.className = "revision-item revision-incorrecta";
+      detalle.textContent = `❌ Sin responder · Correcta: ${correcta.texto}`;
+    } else if (pregunta.respuestas[indice_elegido].esCorrecta) {
+      // Caso 2: acertó
+      item.className = "revision-item revision-correcta";
+      detalle.textContent = `✅ Tu respuesta: ${pregunta.respuestas[indice_elegido].texto}`;
+    } else {
+      // Caso 3: se equivocó → mostramos lo que eligió y la correcta
+      item.className = "revision-item revision-incorrecta";
+      detalle.textContent =
+        `❌ Tu respuesta: ${pregunta.respuestas[indice_elegido].texto} · Correcta: ${correcta.texto}`;
+    }
+
+    item.appendChild(enunciado);
+    item.appendChild(detalle);
+    resultado_revision.appendChild(item);
+  });
+}
+
 
 boton_volver_lista.addEventListener("click", function () {
   mostrarPantalla(seccion_lista);

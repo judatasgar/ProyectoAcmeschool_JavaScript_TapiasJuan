@@ -44,7 +44,7 @@
         </div>
         <!-- Nuestro Web Component: el navegador lo entiende gracias a exam-timer.js -->
         <exam-timer id="reloj"></exam-timer>
-        
+
         <!-- Barra de progreso: role="progressbar" + aria-value* la hacen accesible -->
         <div class="progreso">
           <p id="progreso-texto" class="progreso-texto"></p>
@@ -67,6 +67,10 @@
       <p id="resultado-estudiante"></p>
       <p id="resultado-porcentaje"></p>
       <p id="resultado-estado"></p>
+      <!-- Revisión: cada pregunta con ✅ / ❌ (la llena resolver.js) -->
+      <h3>Revisión de tus respuestas</h3>
+      <ol id="resultado-revision" class="revision"></ol>
+
       <button type="button" id="btn-volver-lista">Volver a la lista</button>
     </section>
   </main>
