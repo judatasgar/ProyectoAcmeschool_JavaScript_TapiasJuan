@@ -4,7 +4,8 @@
 //   1. Lista  →  2. Datos del estudiante  →  3. Examen + reloj  →  4. Resultado
 // =============================================================
 import { leer, guardar } from "./storage.js";
-import "./componentes/exam-timer.js";
+import "./componentes/exam-timer.js"; // solo registra <exam-timer>, no importa nombres
+import "./componentes/app-nav.js";    // barra de navegación
 
 // ----- Datos y "cajas" compartidas entre eventos -----
 const examenes = leer("examenes");
@@ -57,7 +58,7 @@ function mostrarPantalla(seccion_a_mostrar) {
 }
 
 // =============================================================
-// PANTALLA 1: lista de exámenes
+// PANTALLA 1: lista de exámenes (tu código del commit 4)
 // =============================================================
 function pintarListaExamenes() {
   lista_examenes.innerHTML = "";

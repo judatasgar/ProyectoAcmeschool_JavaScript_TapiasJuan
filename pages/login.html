@@ -3,11 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acme School - Login</title>
+  <title>Acme School – Iniciar sesión</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/styles.css">
-  <script src="../js/login.js" defer></script>
+  <script type="module" src="../js/login.js"></script>
 </head>
 <body>
-  <h1>Inicio de sesión</h1>
+  <app-nav base="../"></app-nav>
+  <main>
+    <section class="panel panel-angosto">
+      <h1>Iniciar sesión</h1>
+      <p>Acceso para personal administrativo y docente.</p>
+      <form id="form-login" novalidate>
+        <label for="input-email">Correo electrónico</label>
+        <input id="input-email" type="email" autocomplete="username">
+
+        <label for="input-password">Contraseña</label>
+        <input id="input-password" type="password" autocomplete="current-password">
+
+        <p id="login-error" class="mensaje-error" role="alert" hidden></p>
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
 </body>
 </html>
