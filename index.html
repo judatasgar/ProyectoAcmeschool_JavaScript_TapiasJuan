@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acme School – Exámenes</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/styles.css">
 <script type="module" src="js/resolver.js"></script></head>
 <body>
@@ -12,6 +13,20 @@
       <h1>Exámenes disponibles</h1>
       <div id="lista-examenes"></div>
     </section>
+        <section id="seccion-estudiante" hidden>
+      <h2 id="titulo-examen-elegido"></h2>
+      <form id="form-estudiante">
+        <label for="input-identificacion">Identificación</label>
+        <input id="input-identificacion" type="text">
+
+        <label for="input-nombre">Nombre</label>
+        <input id="input-nombre" type="text">
+
+        <p id="mensaje-error"></p>
+        <button type="submit">Comenzar</button>
+      </form>
+    </section>
   </main>
+  
 </body>
 </html>
