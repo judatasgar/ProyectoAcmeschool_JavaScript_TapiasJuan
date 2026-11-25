@@ -6,27 +6,55 @@
   <title>Acme School – Exámenes</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/styles.css">
-<script type="module" src="js/resolver.js"></script></head>
+  <script type="module" src="js/resolver.js"></script>
+</head>
 <body>
   <main>
     <section id="seccion-lista">
       <h1>Exámenes disponibles</h1>
       <div id="lista-examenes"></div>
     </section>
-        <section id="seccion-estudiante" hidden>
+
+    <section id="seccion-estudiante" hidden>
       <h2 id="titulo-examen-elegido"></h2>
-      <form id="form-estudiante">
+      <form id="form-estudiante" novalidate>
         <label for="input-identificacion">Identificación</label>
-        <input id="input-identificacion" type="text">
+        <input id="input-identificacion" type="text" autocomplete="off">
 
         <label for="input-nombre">Nombre</label>
-        <input id="input-nombre" type="text">
+        <input id="input-nombre" type="text" autocomplete="name">
 
-        <p id="mensaje-error"></p>
+        <!-- role="alert": el lector de pantalla lee el error en cuanto aparece -->
+        <p id="mensaje-error" role="alert" hidden></p>
+
+        <button type="button" id="btn-volver-estudiante">Volver</button>
         <button type="submit">Comenzar</button>
       </form>
     </section>
+
+    <section id="seccion-examen" hidden>
+      <header class="examen-encabezado">
+        <div>
+          <h2 id="examen-titulo"></h2>
+          <p id="examen-info"></p>
+        </div>
+        <!-- Nuestro Web Component: el navegador lo entiende gracias a exam-timer.js -->
+        <exam-timer id="reloj"></exam-timer>
+      </header>
+      <form id="form-examen">
+        <div id="contenedor-preguntas"></div>
+        <button type="submit">Terminar</button>
+      </form>
+    </section>
+
+    <section id="seccion-resultado" hidden>
+      <h2>Resultado</h2>
+      <p id="resultado-nota"></p>
+      <p id="resultado-estudiante"></p>
+      <p id="resultado-porcentaje"></p>
+      <p id="resultado-estado"></p>
+      <button type="button" id="btn-volver-lista">Volver a la lista</button>
+    </section>
   </main>
-  
 </body>
 </html>
