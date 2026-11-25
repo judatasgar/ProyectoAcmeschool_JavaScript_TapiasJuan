@@ -4,10 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acme School – Gestión de exámenes</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/styles.css">
   <script type="module" src="../js/examenes.js"></script>
 </head>
 <body>
-  <h1>Exámenes Gestión </h1>
+  <app-nav base="../"></app-nav>
+  <main>
+    <!-- LISTA (tabla) -->
+    <section class="panel">
+      <div class="panel-encabezado">
+        <h1>Gestión de exámenes</h1>
+        <button type="button" id="btn-nuevo-examen">+ Nuevo examen</button>
+      </div>
+      <p id="mensaje-estado" class="mensaje-exito" role="status" hidden></p>
+
+      <div class="tabla-contenedor">
+        <table>
+          <caption class="solo-lector">Exámenes registrados</caption>
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Título</th>
+              <th scope="col">Tiempo</th>
+              <th scope="col">Aprobación</th>
+              <th scope="col">Preguntas</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-examenes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FORMULARIO (crear / editar) -->
+    <section class="panel" id="seccion-form-examen" hidden>
+      <h2 id="titulo-form-examen">Nuevo examen</h2>
+      <form id="form-examen" novalidate>
+        <div class="form-rejilla">
+          <div class="campo">
+            <label for="examen-codigo">Código</label>
+            <input id="examen-codigo" type="text" placeholder="Ej: MAT-01">
+          </div>
+          <div class="campo">
+            <label for="examen-titulo">Título</label>
+            <input id="examen-titulo" type="text">
+          </div>
+          <div class="campo">
+            <label for="examen-tiempo">Tiempo (minutos)</label>
+            <input id="examen-tiempo" type="number" min="1" max="300" step="1">
+          </div>
+          <div class="campo">
+            <label for="examen-porcentaje">Porcentaje de aprobación</label>
+            <input id="examen-porcentaje" type="number" min="1" max="100" step="1">
+          </div>
+          <div class="campo campo-completo">
+            <label for="examen-descripcion">Descripción</label>
+            <textarea id="examen-descripcion" rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Editor de preguntas: lo construye examenes.js -->
+        <fieldset class="editor">
+          <legend>Preguntas</legend>
+          <p class="ayuda">Marca con el círculo la <strong>única</strong> respuesta correcta de cada pregunta.</p>
+          <div id="editor-preguntas"></div>
+          <button type="button" id="btn-agregar-pregunta" class="boton-secundario">+ Agregar pregunta</button>
+        </fieldset>
+
+        <div id="examen-errores" class="mensaje-error" role="alert" hidden></div>
+
+        <div class="acciones">
+          <button type="button" id="btn-cancelar-examen" class="boton-secundario">Cancelar</button>
+          <button type="submit">Guardar examen</button>
+        </div>
+      </form>
+    </section>
+  </main>
 </body>
 </html>
